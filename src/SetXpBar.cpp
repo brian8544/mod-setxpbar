@@ -43,7 +43,7 @@ void SetXpBarServerScript::SendChunkedPayload(Warden* warden, WardenPayloadMgr* 
     warden->ForceChecks();
 }
 
-bool SetXpBarServerScript::CanPacketSend(WorldSession* session, WorldPacket& packet)
+bool SetXpBarServerScript::CanPacketSend(WorldSession* session, const WorldPacket& packet)
 {
     if (!sxp_Enabled)
         return true;
