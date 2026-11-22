@@ -34,12 +34,27 @@ local function InitializeMenu(self,level)
 end
 local xpBarMenu=CreateFrame("Frame","SetXpBarMenu",UIParent,"UIDropDownMenuTemplate")
 xpBarMenu.initialize=InitializeMenu
-MainMenuExpBar:EnableMouse(true)
-MainMenuExpBar:SetScript("OnMouseDown",function(self,button)
+
+
+-- elvui blizz xpbar support
+
+local function OpenXpMenu(self,button)
     if button=="RightButton" then
         EasyMenu(xpRates,xpBarMenu,"cursor",3,-3,"MENU")
     end
-end)
+end
+if ElvUI_ExperienceBar then
+    ElvUI_ExperienceBar:EnableMouse(true)
+    ElvUI_ExperienceBar:HookScript("OnClick",OpenXpMenu)
+elseif MainMenuExpBar then
+    MainMenuExpBar:EnableMouse(true)
+    MainMenuExpBar:HookScript("OnMouseDown",OpenXpMenu)
+end
+
+----------
+
+
+
 StaticPopupDialogs["SET_XP_RATE"]={
     text="Enter custom XP rate:",
     button1="Set Rate",
